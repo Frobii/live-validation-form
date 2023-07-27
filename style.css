@@ -40,8 +40,7 @@ body {
 }
 
 #signupForm {
-    /* display: none; */
-    display: flex;
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -102,4 +101,5 @@ legend {
 input {
     border: none;
     border-bottom: solid 1.5px rgba(29, 29, 29, 0.835);
+    font-size: 1.2rem;
 }
