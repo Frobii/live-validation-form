@@ -19,23 +19,28 @@ const formConfiguration = () => {
     const emailField = document.getElementById('email');
     emailField.required = true;
 
-    emailField.addEventListener('input', (event) => {
-      if (emailField.validity.valid) {
-        console.log('valid')
-      } else {console.log('invalid')}
-    })
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    ['focus', 'input'].forEach((evt) => emailField.addEventListener(evt, (event) => {
+      if (emailRegex.test(emailField.value)) {
+        emailField.style.borderColor = 'green';
+        emailField.style.outlineColor = 'green';
+      } else {
+        emailField.style.borderColor = 'red';
+        emailField.style.outlineColor = 'red';
+      }
+    }));
   }
 
   function liveValidation() {
-    validateEmail()
+    validateEmail();
 
     const submitButton = document.querySelector('.submit-button');
-    const form = document.getElementById('signupForm')
+    const form = document.getElementById('signupForm');
 
     submitButton.addEventListener('click', (event) => {
       event.preventDefault();
-      form.reportValidity();
-    })
+    });
   }
 
   return {
