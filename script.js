@@ -66,10 +66,45 @@ const formConfiguration = () => {
     }));
   }
 
+  function validatePassword() {
+    const passwordField = document.getElementById('password');
+    passwordField.required = true;
+
+    const passwordRegex = /^(?=.*[!@#$_%^&*()|~`+[{}\]:"'<>,.?\/-])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{9,}$/;
+
+    ['focus', 'input'].forEach((action) => passwordField.addEventListener(action, (event) => {
+      if (passwordRegex.test(passwordField.value)) {
+        passwordField.style.borderColor = 'green';
+        passwordField.style.outlineColor = 'green';
+      } else {
+        passwordField.style.borderColor = 'red';
+        passwordField.style.outlineColor = 'red';
+      }
+    }));
+  }
+
+  function matchPasswords() {
+    const passwordField = document.getElementById('password');
+    const confirmPasswordField = document.getElementById('confirmPassword');
+    confirmPasswordField.required = true;
+
+    ['focus', 'input'].forEach((action) => confirmPasswordField.addEventListener(action, (event) => {
+      if (passwordField.value === confirmPasswordField.value && passwordField.checkValidity()) {
+        confirmPasswordField.style.borderColor = 'green';
+        confirmPasswordField.style.outlineColor = 'green';
+      } else {
+        confirmPasswordField.style.borderColor = 'red';
+        confirmPasswordField.style.outlineColor = 'red';
+      }
+    }));
+  }
+
   function liveValidation() {
     validateEmail();
     validateCountry();
     validateZipcode();
+    validatePassword();
+    matchPasswords();
   }
 
   function submitValidation() {
