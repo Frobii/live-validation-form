@@ -21,31 +21,28 @@ const formConfiguration = () => {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    ['focus', 'input'].forEach((action) => emailField.addEventListener(action, (event) => {
+    ['focus', 'input'].forEach((action) => emailField.addEventListener(action, () => {
       if (emailRegex.test(emailField.value)) {
-        emailField.style.borderColor = 'green';
-        emailField.style.outlineColor = 'green';
+        emailField.setCustomValidity('');
       } else {
-        emailField.style.borderColor = 'red';
-        emailField.style.outlineColor = 'red';
+        emailField.setCustomValidity('Use the correct email format i.e. "user@example.com"');
       }
+      emailField.classList.add('checked');
     }));
   }
 
   function validateCountry() {
     const countryField = document.getElementById('country');
     countryField.required = true;
-
     const countryRegex = /^[A-Z][A-Za-z]*(?: [A-Z][A-Za-z]*)*$/;
 
-    ['focus', 'input'].forEach((action) => countryField.addEventListener(action, (event) => {
+    ['focus', 'input'].forEach((action) => countryField.addEventListener(action, () => {
       if (countryRegex.test(countryField.value)) {
-        countryField.style.borderColor = 'green';
-        countryField.style.outlineColor = 'green';
+        countryField.setCustomValidity('');
       } else {
-        countryField.style.borderColor = 'red';
-        countryField.style.outlineColor = 'red';
+        countryField.setCustomValidity('Countries must begin with a capital letter & cannot end with a space i.e. "United States"');
       }
+      countryField.classList.add('checked');
     }));
   }
 
@@ -55,14 +52,13 @@ const formConfiguration = () => {
 
     const zipCodeRegex = /^\d{5}(?:-\d{4})?|[A-Z]\d[A-Z] \d[A-Z]\d|\d{4}$/i;
 
-    ['focus', 'input'].forEach((action) => zipcodeField.addEventListener(action, (event) => {
+    ['focus', 'input'].forEach((action) => zipcodeField.addEventListener(action, () => {
       if (zipCodeRegex.test(zipcodeField.value)) {
-        zipcodeField.style.borderColor = 'green';
-        zipcodeField.style.outlineColor = 'green';
+        zipcodeField.setCustomValidity('');
       } else {
-        zipcodeField.style.borderColor = 'red';
-        zipcodeField.style.outlineColor = 'red';
+        zipcodeField.setCustomValidity('Accepted Zip Codes: \n United States "12345" \n US ZIP + 4 "12345-6789" \n Canada "A1A 1A1" \n Australia "4000"');
       }
+      zipcodeField.classList.add('checked');
     }));
   }
 
@@ -72,14 +68,13 @@ const formConfiguration = () => {
 
     const passwordRegex = /^(?=.*[!@#$_%^&*()|~`+[{}\]:"'<>,.?\/-])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{9,}$/;
 
-    ['focus', 'input'].forEach((action) => passwordField.addEventListener(action, (event) => {
+    ['focus', 'input'].forEach((action) => passwordField.addEventListener(action, () => {
       if (passwordRegex.test(passwordField.value)) {
-        passwordField.style.borderColor = 'green';
-        passwordField.style.outlineColor = 'green';
+        passwordField.setCustomValidity('');
       } else {
-        passwordField.style.borderColor = 'red';
-        passwordField.style.outlineColor = 'red';
+        passwordField.setCustomValidity('Passwords must contain: \n A Special Character (i.e. !@#$%^&*_) \n A Number \n An Uppercase Letter \n A Lowercase Letter.');
       }
+      passwordField.classList.add('checked');
     }));
   }
 
@@ -88,14 +83,13 @@ const formConfiguration = () => {
     const confirmPasswordField = document.getElementById('confirmPassword');
     confirmPasswordField.required = true;
 
-    ['focus', 'input'].forEach((action) => confirmPasswordField.addEventListener(action, (event) => {
+    ['focus', 'input'].forEach((action) => confirmPasswordField.addEventListener(action, () => {
       if (passwordField.value === confirmPasswordField.value && passwordField.checkValidity()) {
-        confirmPasswordField.style.borderColor = 'green';
-        confirmPasswordField.style.outlineColor = 'green';
+        confirmPasswordField.setCustomValidity('');
       } else {
-        confirmPasswordField.style.borderColor = 'red';
-        confirmPasswordField.style.outlineColor = 'red';
+        confirmPasswordField.setCustomValidity('Passwords must match');
       }
+      confirmPasswordField.classList.add('checked');
     }));
   }
 
@@ -113,6 +107,7 @@ const formConfiguration = () => {
 
     submitButton.addEventListener('click', (event) => {
       event.preventDefault();
+      form.reportValidity();
     });
   }
 

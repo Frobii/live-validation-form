@@ -103,3 +103,13 @@ input {
     border-bottom: solid 2px rgba(29, 29, 29, 0.835);
     font-size: 1.2rem;
 }
+
+input.checked:valid {
+    border-color: green;
+    outline-color: green;
+}
+
+input.checked:invalid {
+    border-color: red;
+    outline-color: red;
+}
