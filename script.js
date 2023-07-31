@@ -3,6 +3,7 @@ const formConfiguration = () => {
     const formButton = document.querySelector('.open-form-button');
     const form = document.getElementById('signupForm');
     const backdrop = document.querySelector('.back-drop');
+    const submitGif = document.querySelector('.submit-gif');
 
     formButton.addEventListener('click', () => {
       form.style.display = 'flex';
@@ -12,6 +13,7 @@ const formConfiguration = () => {
     backdrop.addEventListener('click', () => {
       form.style.display = 'none';
       backdrop.style.display = 'none';
+      submitGif.style.display = 'none';
     });
   }
 
@@ -104,10 +106,15 @@ const formConfiguration = () => {
   function submitValidation() {
     const submitButton = document.querySelector('.submit-button');
     const form = document.getElementById('signupForm');
+    const submitGif = document.querySelector('.submit-gif');
 
     submitButton.addEventListener('click', (event) => {
       event.preventDefault();
       form.reportValidity();
+      if (form.checkValidity()) {
+        form.style.display = 'none';
+        submitGif.style.display = 'flex';
+      }
     });
   }
 
